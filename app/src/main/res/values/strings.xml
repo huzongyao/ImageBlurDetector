@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BlurDetector</string>
+    <string name="level_format">Clear Level: %8f</string>
+</resources>
