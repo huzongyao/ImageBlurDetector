@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.ImageUtils;
 import com.hzy.blur.detect.demo.utils.ActionUtils;
-import com.hzy.blur.detector.DetectorApi;
+import com.hzy.blur.detector.BlurDetectorApi;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void detectFromBitmap() {
         mExecutorService.submit(() -> {
-            double result = DetectorApi.detectFromBmp(mDemoBitmap);
+            double result = BlurDetectorApi.detectFromBmp(mDemoBitmap);
             runOnUiThread(() -> {
                 mImageSelect.setImageBitmap(mDemoBitmap);
                 mTextLevel.setText(getString(R.string.level_format, result));

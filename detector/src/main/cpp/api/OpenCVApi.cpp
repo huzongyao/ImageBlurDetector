@@ -6,6 +6,12 @@
 #include <android/bitmap.h>
 #include "DetectUtils.h"
 
+#if DETECT_FILE
+
+#include <opencv2/imgcodecs.hpp>
+
+#endif
+
 using namespace cv;
 
 JNIEXPORT jstring JNICALL

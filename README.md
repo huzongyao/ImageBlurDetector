@@ -2,7 +2,24 @@
 Simply check if an image is blur on Android device
 
 ### Details
+* 对图像模糊度检测，简单的方式是拉普拉斯变换再求方差获取一个数值，python代码仅需1行
+``` python
+cv2.Laplacian(image, cv2.CV_64F).var()
+```
 
+* 安卓上实现的话可以用OpenCV Android SDK，我使用了OpenCV静态库方式，生成的动态库不是很大，可以用于生产。
+``` c++
+double detectBlur(cv::Mat &gray) {
+    cv::Mat lap;
+    Laplacian(gray, lap, CV_64F);
+    Scalar m, s;
+    meanStdDev(lap, m, s);
+    double st = s[0];
+    return st * st;
+}
+```
+
+* https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/
 
 ### Attention
 * In Order to Speed up Repository clone process, OpenCV SDK files are git ignored by this project. So after first time clone the Repository, Please download the OpenCV Android SDK and copy folders under sdk/native/ into /detector/cpp/opencv/, and then compile could process. 

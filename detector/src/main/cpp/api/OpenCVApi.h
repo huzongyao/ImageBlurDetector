@@ -7,7 +7,7 @@
 
 #include <jni.h>
 
-#define JNI_FUNC(x) Java_com_hzy_blur_detector_DetectorApi_##x
+#define JNI_FUNC(x) Java_com_hzy_blur_detector_BlurDetectorApi_##x
 
 #ifdef __cplusplus
 extern "C" {

@@ -2,7 +2,7 @@ package com.hzy.blur.detector;
 
 import android.graphics.Bitmap;
 
-public class DetectorApi {
+public class BlurDetectorApi {
 
     public static native String getVersionString();
 
