@@ -1,6 +1,13 @@
 # ImageBlurDetector
 Simply check if an image is blur on Android device
 
+[![Travis](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)](https://github.com/huzongyao/ImageBlurDetector/releases)
+[![Travis](https://img.shields.io/badge/API-16+-brightgreen.svg)](https://github.com/huzongyao/ImageBlurDetector)
+
+|  Blur Image | Clear Image |
+| ------------ | -------------- |
+|![pic](https://github.com/huzongyao/ImageBlurDetector/blob/master/misc/demo1.png?raw=true)|![pic](https://github.com/huzongyao/ImageBlurDetector/blob/master/misc/demo2.png?raw=true)|
+
 ### Details
 * 对图像模糊度检测，简单的方式是拉普拉斯变换再求方差获取一个数值，python代码仅需1行
 ``` python

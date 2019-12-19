@@ -6,10 +6,15 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.UriUtils;
 import com.blankj.utilcode.util.Utils;
+
+import java.io.File;
+import java.util.UUID;
 
 public class ActionUtils {
 
@@ -43,6 +48,23 @@ public class ActionUtils {
         return bitmap;
     }
 
+
+    public static String startCameraPhoto(Activity activity, int requestCode) {
+        try {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null) {
+                String imagePath = randomImagePath();
+                Uri imageUri = UriUtils.file2Uri(new File(imagePath));
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                activity.startActivityForResult(takePictureIntent, requestCode);
+                return imagePath;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void startImageContentAction(Activity activity, int requestCode) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT).setType("image/*")
                 .addCategory(Intent.CATEGORY_OPENABLE);
@@ -63,5 +85,31 @@ public class ActionUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String randomImagePath() {
+        File cachePath = null;
+        String fileName = UUID.randomUUID().toString() + ".jpg";
+        File outFile = null;
+        try {
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                cachePath = Utils.getApp().getExternalCacheDir();
+            }
+            if (cachePath == null) {
+                cachePath = Utils.getApp().getCacheDir();
+            }
+            if (cachePath == null) {
+                cachePath = Utils.getApp().getFilesDir();
+            }
+            if (cachePath != null) {
+                outFile = new File(cachePath, fileName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (outFile == null) {
+            outFile = new File("./" + fileName);
+        }
+        return outFile.getAbsolutePath();
     }
 }
